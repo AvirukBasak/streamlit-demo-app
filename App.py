@@ -13,7 +13,7 @@ st.set_page_config(
     page_icon='📁'
 )
 
-st.header('Introducing Aviruk')
+st.title('Introducing Aviruk')
 
 lottie_url = 'https://assets2.lottiefiles.com/packages/lf20_NP3cUPExy7.json'
 st_lottie(load_lottieurl(lottie_url))

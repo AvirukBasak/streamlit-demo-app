@@ -1,9 +1,7 @@
 import streamlit as st
 
-st.header('Demo Echo App')
+md = open('res/profile.md', 'r')
+data = md.read()
+md.close()
 
-txt = st.text_input('Input',
-    placeholder = 'Enter any text'
-)
-
-st.write('', txt)
+st.markdown(str(data))

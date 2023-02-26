@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-from matplotlib import image
+from PIL import Image
 
 import math
 
@@ -43,10 +43,6 @@ def handle_image(img_arr):
 img_file_buffer = col1.file_uploader('Upload an image', type=['png', 'jpg'])
 
 if img_file_buffer is not None:
-    image = image.imread(img_file_buffer)
+    image = Image.open(img_file_buffer)
     img_array = np.array(image)
-    if int(img_array.sum() / ( len(img_array)*len(img_array[0])*3 )) <= 1:
-        img_array = img_array
-    else:
-        img_array = img_array / 255
     handle_image(img_array)

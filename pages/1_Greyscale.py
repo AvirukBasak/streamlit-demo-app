@@ -13,25 +13,38 @@ def sigmoid(x, lvl=None):
 def squishify(x, lvl=1):
     return sigmoid(x -lvl)
 
+def mean_div(x, lvl=None):
+    return x / 3
+
 st.title('Greyscale')
 
 col1, col2 = st.columns(2)
 
 def handle_image(img_arr):
+    # select function
     fn = col1.selectbox(
         'Select greyscale method',
-        ('Modified Sigmoid', 'Sigmoid')
+        ('Modified Sigmoid', 'Sigmoid', 'Average')
     )
-    lvl = col1.slider('Set greyscale brightness', 0, 100, value=20) * 5 / 100 if fn == 'Modified Sigmoid' else None
+    # select greyscale brightness
+    lvl = col1.slider('Set greyscale brightness', 0, 100, value=30) * 5 / 100 if fn == 'Modified Sigmoid' else None
+    # display original image
     col2.subheader('Original')
     col2.image(img_array)
+    # display original RGB sample
     if col1.checkbox('Sample original pixel data', key='chk1'):
         col1.write(img_arr[1:3][1:3])
+    # greyscale image
     gsimd_sq = np.zeros(shape=(len(img_arr), len(img_arr[0]), 3))
+    # a list of functions available
     functions = {
         'Modified Sigmoid': squishify,
-        'Sigmoid': sigmoid
+        'Sigmoid': sigmoid,
+        'Average': mean_div
     }
+    # bring down the values to range of 0 to 1
+    img_arr = img_arr / 255
+    # convert to greyscale
     for i in range(0, len(img_arr)):
         for j in range(0, len(img_arr[0])):
             gsimd_sq[i,j] = functions[fn](img_arr[i,j].sum(), lvl=lvl)

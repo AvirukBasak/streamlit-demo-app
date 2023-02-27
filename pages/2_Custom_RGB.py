@@ -7,14 +7,11 @@ import math
 def mod_img(img, r, g, b):
     size = len(img) * len(img[0])
     (rsum, gsum, bsum) = np.sum(img, axis=(0, 1))
-    st.write((r * size, g * size, b * size))
-    st.write((rsum, gsum, bsum))
     (rdif, gdif, bdif) = (
         int((r * size - rsum) / size),
         int((g * size - gsum) / size),
         int((b * size - bsum) / size)
     )
-    st.write((rdif, gdif, bdif))
     return np.add(img, np.array([rdif, gdif, bdif]))
 
 st.title('Custom RGB')
@@ -37,7 +34,7 @@ def handle_image(img_arr):
     modimg = mod_img(img_arr, r, g, b)
     # display modded image
     col2.subheader('Modified')
-    col2.image(modimg)
+    # col2.image(modimg)
     # display greyscale RGB sample
     if col1.checkbox('Sample mod image pixel data', key='chk2'):
         col1.write(modimg[1:3][1:3])

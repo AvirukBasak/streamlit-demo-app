@@ -2,5 +2,5 @@
 Streamlit demo app
 
 - [x] Greyscale
-- [ ] Custom RGB
+- [x] Custom RGB
 - [ ] Crop and Rotate

@@ -48,8 +48,12 @@ def handle_image(img_arr):
     for i in range(0, len(img_arr)):
         for j in range(0, len(img_arr[0])):
             gsimd_sq[i,j] = functions[fn](img_arr[i,j].sum(), lvl=lvl)
+    # bring up the values to range of 0 to 255
+    gsimd_sq = gsimd_sq // (1/255)
+    # display greyscale image
     col2.subheader('Greyscale')
     col2.image(gsimd_sq)
+    # display greyscale RGB sample
     if col1.checkbox('Sample greyscale pixel data', key='chk2'):
         col1.write(gsimd_sq[1:3][1:3])
 
